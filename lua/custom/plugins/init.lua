@@ -28,6 +28,24 @@ return {
         }
     },
     {
+        'tanvirtin/vgit.nvim',
+        dependencies = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('vgit').setup()
+        end
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+        keys = {
+            { "<leader>mp", "<cmd>MarkdownPreview<cr>",       desc = "MarkdownPreview" },
+            { "<leader>ms", "<cmd>MarkdownPreviewStop<cr>",   desc = "MarkdownPreviewStop" },
+            { "<leader>mt", "<cmd>MarkdownPreviewToggle<cr>", desc = "MarkdownPreviewToggle" },
+
+        }
+    },
+    {
         "p00f/clangd_extensions.nvim",
         lazy = false,
         config = function(_)

@@ -137,14 +137,6 @@ require('lazy').setup({
     end
   },
   -- {
-  --   "catppuccin/nvim",
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme 'catppuccin-mocha'
-  --   end
-  -- },
-  -- {
   --   -- Theme inspired by Atom
   --   'navarasu/onedark.nvim',
   --   priority = 1000,
