@@ -10,6 +10,10 @@ vim.cmd("map <C-y> <cmd>:undo<cr>")
 vim.cmd("map <C-z> <cmd>:redo<cr>")
 vim.cmd("tnoremap <Esc> <C-\\><C-n>")
 vim.cmd("map <F2> :lua vim.lsp.buf.rename()<cr>")
+vim.cmd("nmap <silent> <c-k> :wincmd k<CR>")
+vim.cmd("nmap <silent> <c-j> :wincmd j<CR>")
+vim.cmd("nmap <silent> <c-h> :wincmd h<CR>")
+vim.cmd("nmap <silent> <c-l> :wincmd l<CR>")
 vim.keymap.set('n', '<leader>Q', function()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
         if vim.api.nvim_win_get_config(win).relative ~= '' then
@@ -29,13 +33,10 @@ function Set_tab(tabwidth)
 end
 
 vim.cmd("command! -nargs=1 Tab lua Set_tab(<q-args>)")
-vim.api.nvim_feedkeys(
-    vim.api.nvim_replace_termcodes("<cmd>ClangdSetInlayHints<cr>", true, false, true),
-    "m",
-    true)
--- if vim.is_callable("ClangdSetInlayHints") then
---     vim.cmd("ClangdSetInlayHints")
--- else
---     vim.cmd("echo \"No\"")
--- end
+function Add_modeline(tabwidth)
+    vim.api.nvim_buf_set_lines(0, -1, -1, false,
+        { ("// Vim: set expandtab tabstop=%d shiftwidth=%d:"):format(tabwidth, tabwidth) })
+end
+
+vim.cmd("command! -nargs=1 AML lua Add_modeline(<q-args>)")
 return {}
