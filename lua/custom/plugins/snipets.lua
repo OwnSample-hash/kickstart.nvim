@@ -37,4 +37,13 @@ ls.add_snippets("lua", {
     })
 })
 
+ls.add_snippets("python", {
+    s("curs_ch_mid", {
+        t("m_y,m_x = w.getmaxyx();"),
+        t("w.addstr(int(m_y/2), int(m_x/2), "),
+        i(1),
+        t(")")
+    })
+})
+
 return {}
