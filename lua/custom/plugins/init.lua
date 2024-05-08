@@ -162,6 +162,9 @@ return {
     dependencies = {
       'nvim-telescope/telescope-fzf-native.nvim'
     },
-    config = { icons = { kinds = { use_devicons = false } } }
+    opts = { icons = { kinds = { use_devicons = false } } }
+  },
+  {
+    "edKotinsky/Arduino.nvim",
   }
 }

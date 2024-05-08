@@ -129,13 +129,13 @@ require('lazy').setup({
       end,
     },
   },
-  {
-    "Mofiqul/dracula.nvim",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'dracula'
-    end
-  },
+  -- {
+  --   "Mofiqul/dracula.nvim",
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'dracula'
+  --   end
+  -- },
   -- {
   --   -- Theme inspired by Atom
   --   'navarasu/onedark.nvim',
@@ -144,6 +144,14 @@ require('lazy').setup({
   --     vim.cmd.colorscheme 'onedark'
   --   end,
   -- },
+  {
+    'AlexvZyl/nordic.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require 'nordic'.load()
+    end
+  },
 
   {
     -- Set lualine as statusline
@@ -432,7 +440,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
@@ -444,6 +452,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  asm_lsp = {},
 }
 
 -- Setup neovim lua configuration
