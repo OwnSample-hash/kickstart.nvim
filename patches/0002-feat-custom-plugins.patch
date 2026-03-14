@@ -1,0 +1,345 @@
+From d54bc0615d55b18cdd93a53ff78ee3ea4fe3571c Mon Sep 17 00:00:00 2001
+From: OwnSample <ownsample@tutanota.com>
+Date: Fri, 13 Mar 2026 15:54:00 +0100
+Subject: [PATCH 2/5] feat: custom plugins
+
+---
+ lua/custom/plugins/init.lua | 171 ++++++++++++++++++++++++++++++++++--
+ lua/custom/plugins/post.lua | 147 +++++++++++++++++++++++++++++++
+ 2 files changed, 312 insertions(+), 6 deletions(-)
+ create mode 100644 lua/custom/plugins/post.lua
+
+diff --git a/lua/custom/plugins/init.lua b/lua/custom/plugins/init.lua
+index b3ddcfd..7d29c69 100644
+--- a/lua/custom/plugins/init.lua
++++ b/lua/custom/plugins/init.lua
+@@ -1,8 +1,167 @@
+--- You can add your own plugins here or in other files in this directory!
+---  I promise not to create any merge conflicts in this directory :)
+---
+--- See the kickstart.nvim README for more information
+-
+ ---@module 'lazy'
+ ---@type LazySpec
+-return {}
++return {
++  {
++    'akinsho/bufferline.nvim',
++    version = '*',
++    dependencies = 'nvim-tree/nvim-web-devicons',
++    opts = {},
++    keys = {
++      { '<Tab>', '<cmd>bnext<cr>', desc = 'Next tab' },
++      { '<S-Tab>', '<cmd>bprevious<cr>', desc = 'Prev tab' },
++    },
++  },
++  {
++    'tanvirtin/vgit.nvim',
++    dependencies = 'nvim-lua/plenary.nvim',
++    config = function() require('vgit').setup() end,
++  },
++  {
++    'iamcco/markdown-preview.nvim',
++    ft = { 'markdown' },
++    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
++    build = function()
++      require('lazy').load { plugins = { 'markdown-preview.nvim' } }
++      vim.fn['mkdp#util#install']()
++    end,
++    keys = {
++      { '<leader>mp', '<cmd>MarkdownPreview<cr>', desc = '[M]arkdown[P]review' },
++      { '<leader>ms', '<cmd>MarkdownPreviewStop<cr>', desc = '[M]arkdownPreview[S]top' },
++      { '<leader>mt', '<cmd>MarkdownPreviewToggle<cr>', desc = '[M]arkdownPreview[T]oggle' },
++    },
++  },
++  'nvim-lua/plenary.nvim',
++  'nvim-tree/nvim-web-devicons',
++  'MunifTanjim/nui.nvim',
++  {
++    'norcalli/nvim-colorizer.lua',
++    config = function() require('colorizer').setup() end,
++  },
++  {
++    'fedepujol/move.nvim',
++    -- lazy = false,
++    config = function()
++      require('move').setup {
++        char = { enable = true },
++      }
++      local opts = { noremap = true, silent = true }
++      -- Normal-mode commands
++      vim.keymap.set('n', '<A-j>', ':MoveLine(1)<CR>', opts)
++      vim.keymap.set('n', '<A-Down>', ':MoveLine(1)<CR>', opts)
++      vim.keymap.set('n', '<A-k>', ':MoveLine(-1)<CR>', opts)
++      vim.keymap.set('n', '<A-Up>', ':MoveLine(-1)<CR>', opts)
++      vim.keymap.set('n', '<A-h>', ':MoveHChar(-1)<CR>', opts)
++      vim.keymap.set('n', '<A-Left>', ':MoveHChar(-1)<CR>', opts)
++      vim.keymap.set('n', '<A-l>', ':MoveHChar(1)<CR>', opts)
++      vim.keymap.set('n', '<A-Right>', ':MoveHChar(1)<CR>', opts)
++      vim.keymap.set('n', '<leader>wf', ':MoveWord(1)<CR>', opts)
++      vim.keymap.set('n', '<leader>wb', ':MoveWord(-1)<CR>', opts)
++
++      -- Visual-mode commands
++      vim.keymap.set('v', '<A-j>', ':MoveBlock(1)<CR>', opts)
++      vim.keymap.set('v', '<A-Down>', ':MoveBlock(1)<CR>', opts)
++      vim.keymap.set('v', '<A-k>', ':MoveBlock(-1)<CR>', opts)
++      vim.keymap.set('v', '<A-Up>', ':MoveBlock(-1)<CR>', opts)
++      vim.keymap.set('v', '<A-h>', ':MoveHBlock(-1)<CR>', opts)
++      vim.keymap.set('v', '<A-Left>', ':MoveHBlock(-1)<CR>', opts)
++      vim.keymap.set('v', '<A-l>', ':MoveHBlock(1)<CR>', opts)
++      vim.keymap.set('v', '<A-Right>', ':MoveHBlock(1)<CR>', opts)
++    end,
++  },
++  {
++    's1n7ax/nvim-window-picker',
++    name = 'window-picker',
++    event = 'VeryLazy',
++    version = '2.*',
++    config = function() require('window-picker').setup() end,
++  },
++  {
++    'folke/noice.nvim',
++    event = 'VeryLazy',
++    opts = {
++      -- add any options here
++    },
++    dependencies = {
++      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
++      'MunifTanjim/nui.nvim',
++      -- OPTIONAL:
++      --   `nvim-notify` is only needed, if you want to use the notification view.
++      --   If not available, we use `mini` as the fallback
++      'rcarriga/nvim-notify',
++    },
++  },
++  'LunarVim/bigfile.nvim',
++  {
++    'danymat/neogen',
++    dependencies = 'nvim-treesitter/nvim-treesitter',
++    config = true,
++    lazy = false,
++    keys = {
++      { '<Leader>gc', '<cmd>Neogen<cr>', desc = 'Gen annot' },
++    },
++  },
++  {
++    'Bekaboo/dropbar.nvim',
++    dependencies = {
++      'nvim-telescope/telescope-fzf-native.nvim',
++    },
++    lazy = false,
++    -- opts = { icons = { kinds = { use_devicons = true } } },
++    keys = {
++      { '<leader>dp', '<cmd>lua require("dropbar.api").pick()<cr>', desc = '[D]ropbar [p]ick' },
++    },
++  },
++  {
++    'mfussenegger/nvim-dap',
++  },
++  {
++    'rcarriga/nvim-dap-ui',
++    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
++    config = function() require('dapui').setup() end,
++    keys = {
++      { '<leader>dt', "<cmd>lua require('dapui').toggle()<cr>", desc = '[D]apui [t]oggle' },
++      { '<leader>do', "<cmd>lua require('dapui').open()<cr>", desc = '[D]apui [o]pne' },
++      { '<leader>dc', "<cmd>lua require('dapui').close()<cr>", desc = '[D]apui [c]lose' },
++    },
++  },
++  { 'github/copilot.vim' },
++  {
++    'RaafatTurki/hex.nvim',
++    lazy = false,
++    keys = {
++      { '<leader>hx', '<cmd>HexDump<cr>', desc = 'Switches to hex view' },
++      { '<leader>ha', '<cmd>HexAssemble<cr>', desc = 'Go back to normal view' },
++      { '<leader>ht', '<cmd>HexToggle<cr>', desc = 'Toggles hex view' },
++    },
++    config = function() require('hex').setup() end,
++  },
++  {
++    'kevinhwang91/nvim-ufo',
++    dependencies = 'kevinhwang91/promise-async',
++    config = function()
++      vim.o.foldcolumn = '1' -- '0' is not bad
++      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
++      vim.o.foldlevelstart = 99
++      vim.o.foldenable = true
++      local capabilities = vim.lsp.protocol.make_client_capabilities()
++      capabilities.textDocument.foldingRange = {
++        dynamicRegistration = false,
++        lineFoldingOnly = true,
++      }
++      local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
++      for _, ls in ipairs(language_servers) do
++        require('lspconfig')[ls].setup {
++          capabilities = capabilities,
++          -- you can add other fields for setting up lsp server in this table
++        }
++      end
++      require('ufo').setup()
++      --{
++      --   provider_selector = function(_, _, _)
++      --     return { 'treesitter', 'indent' }
++      --   end,
++      -- }
++    end,
++  },
++}
++-- Vim: set expandtab tabstop=2 shiftwidth=2:
+diff --git a/lua/custom/plugins/post.lua b/lua/custom/plugins/post.lua
+new file mode 100644
+index 0000000..6f28327
+--- /dev/null
++++ b/lua/custom/plugins/post.lua
+@@ -0,0 +1,147 @@
++-- require "custom.plugins.snipets"
++vim.wo.rnu = true
++vim.wo.number = true
++vim.o.hlsearch = true
++vim.o.termguicolors = true
++vim.o.colorcolumn = '80'
++
++vim.cmd 'map <C-s> <cmd>:w<cr>'
++vim.cmd 'map <C-y> <cmd>:undo<cr>'
++vim.cmd 'map <C-z> <cmd>:redo<cr>'
++vim.cmd 'tnoremap <Esc> <C-\\><C-n>'
++vim.cmd 'map <F2> :lua vim.lsp.buf.rename()<cr>'
++vim.cmd 'nmap <silent> <c-k> :wincmd k<CR>'
++vim.cmd 'nmap <silent> <c-j> :wincmd j<CR>'
++vim.cmd 'nmap <silent> <c-h> :wincmd h<CR>'
++vim.cmd 'nmap <silent> <c-l> :wincmd l<CR>'
++vim.keymap.set('n', '<leader>Q', function()
++  for _, win in ipairs(vim.api.nvim_list_wins()) do
++    if vim.api.nvim_win_get_config(win).relative ~= '' then
++      vim.api.nvim_win_close(win, true)
++      return
++    end
++  end
++  vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
++end, { desc = 'Toggle Floating Diagnostics' })
++
++vim.keymap.set('n', '<F5>', function()
++  require('dap').continue()
++end)
++vim.keymap.set('n', '<F10>', function()
++  require('dap').step_over()
++end)
++vim.keymap.set('n', '<F11>', function()
++  require('dap').step_into()
++end)
++vim.keymap.set('n', '<F12>', function()
++  require('dap').step_out()
++end)
++vim.keymap.set('n', '<Leader>b', function()
++  require('dap').toggle_breakpoint()
++end)
++vim.keymap.set('n', '<Leader>B', function()
++  require('dap').set_breakpoint()
++end)
++vim.keymap.set('n', '<Leader>lp', function()
++  require('dap').set_breakpoint(nil, nil, vim.fn.input 'Log point message: ')
++end)
++vim.keymap.set('n', '<Leader>dr', function()
++  require('dap').repl.open()
++end)
++vim.keymap.set('n', '<Leader>dl', function()
++  require('dap').run_last()
++end)
++vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
++  require('dap.ui.widgets').hover()
++end)
++vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
++  require('dap.ui.widgets').preview()
++end)
++vim.keymap.set('n', '<Leader>df', function()
++  local widgets = require 'dap.ui.widgets'
++  widgets.centered_float(widgets.frames)
++end)
++vim.keymap.set('n', '<Leader>ds', function()
++  local widgets = require 'dap.ui.widgets'
++  widgets.centered_float(widgets.scopes)
++end)
++
++local dap = require 'dap'
++dap.adapters.gdb = {
++  type = 'executable',
++  command = 'gdb',
++  args = { '--interpreter=dap', '-nx', '--eval-command', 'set print pretty on' },
++}
++
++dap.configurations.c = {
++  {
++    name = 'Launch',
++    type = 'gdb',
++    request = 'launch',
++    program = function()
++      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
++    end,
++    cwd = '${workspaceFolder}',
++    stopAtBeginningOfMainSubprogram = false,
++  },
++  {
++    name = 'Select and attach to process',
++    type = 'gdb',
++    request = 'attach',
++    program = function()
++      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
++    end,
++    pid = function()
++      local name = vim.fn.input 'Executable name (filter): '
++      return require('dap.utils').pick_process { filter = name }
++    end,
++    cwd = '${workspaceFolder}',
++  },
++  {
++    name = 'Attach to gdbserver :1234',
++    type = 'gdb',
++    request = 'attach',
++    target = 'localhost:1234',
++    program = function()
++      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
++    end,
++    cwd = '${workspaceFolder}',
++  },
++}
++
++function Set_tab(tabwidth)
++  -- vim.cmd("set tabstop=" .. tonumber(tabwidth) .. " shiftwidth=" .. tonumber(tabwidth) .. " expandtab")
++  vim.o.tabstop = tonumber(tabwidth)
++  vim.o.shiftwidth = tonumber(tabwidth)
++  vim.o.expandtab = true
++  vim.cmd('echo "Tab width set to ' .. tabwidth .. '"')
++end
++
++vim.cmd 'command! -nargs=1 Tab lua Set_tab(<q-args>)'
++function Add_modeline(tabwidth)
++  local full = (vim.o.commentstring):format(('Vim: set expandtab tabstop=%d shiftwidth=%d:'):format(tabwidth, tabwidth))
++  vim.api.nvim_buf_set_lines(0, -1, -1, false, { full })
++  Set_tab(tabwidth)
++end
++
++vim.cmd 'command! -nargs=1 AML lua Add_modeline(<q-args>)'
++
++vim.api.nvim_create_autocmd('ColorScheme', {
++  pattern = '*',
++  -- group = ...,
++  callback = function()
++    vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
++      fg = '#555555',
++      ctermfg = 8,
++      force = true,
++    })
++  end,
++})
++
++vim.api.nvim_set_hl(0, '@lsp.type.comment.doxygen', { link = 'Comment' })
++vim.api.nvim_set_hl(0, '@keyword.doxygen', { link = 'Special' }) -- @param, @return …
++vim.api.nvim_set_hl(0, '@type.doxygen', { link = 'Type' }) -- type names in params
++vim.api.nvim_set_hl(0, '@variable.parameter.doxygen', { link = 'Identifier' })
++vim.api.nvim_set_hl(0, '@text.uri.doxygen', { link = 'Underlined' }) -- URLs in comments
++
++return {}
+-- 
+2.53.0
+

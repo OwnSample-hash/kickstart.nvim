@@ -1,0 +1,103 @@
+From 248423896c5d60b28182449f0503b4bd12c8de0e Mon Sep 17 00:00:00 2001
+From: OwnSample <ownsample@tutanota.com>
+Date: Fri, 13 Mar 2026 15:53:38 +0100
+Subject: [PATCH 1/5] feat: treesitter injections
+
+---
+ after/queries/c/injections.scm    | 27 +++++++++++++++++++++++++++
+ after/queries/cpp/injections.scm  | 27 +++++++++++++++++++++++++++
+ after/queries/html/injections.scm | 14 ++++++++++++++
+ 3 files changed, 68 insertions(+)
+ create mode 100644 after/queries/c/injections.scm
+ create mode 100644 after/queries/cpp/injections.scm
+ create mode 100644 after/queries/html/injections.scm
+
+diff --git a/after/queries/c/injections.scm b/after/queries/c/injections.scm
+new file mode 100644
+index 0000000..1f98106
+--- /dev/null
++++ b/after/queries/c/injections.scm
+@@ -0,0 +1,27 @@
++; Doxygen injection for C
++; Place this file at: after/queries/c/injections.scm
++; (inside your Neovim config, e.g. ~/.config/nvim/after/queries/c/injections.scm)
++
++; Match /** ... */ block comments (Doxygen-style)
++((comment) @injection.content
++  (#match? @injection.content "^/[*][*]")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
++
++; Match /*! ... */ block comments (Qt-style Doxygen)
++((comment) @injection.content
++  (#match? @injection.content "^/[*]!")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
++
++; Match ///  line comments (triple-slash Doxygen)
++((comment) @injection.content
++  (#match? @injection.content "^///")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
++
++; Match //! line comments (Qt-style Doxygen line comments)
++((comment) @injection.content
++  (#match? @injection.content "^//!")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
+diff --git a/after/queries/cpp/injections.scm b/after/queries/cpp/injections.scm
+new file mode 100644
+index 0000000..1f98106
+--- /dev/null
++++ b/after/queries/cpp/injections.scm
+@@ -0,0 +1,27 @@
++; Doxygen injection for C
++; Place this file at: after/queries/c/injections.scm
++; (inside your Neovim config, e.g. ~/.config/nvim/after/queries/c/injections.scm)
++
++; Match /** ... */ block comments (Doxygen-style)
++((comment) @injection.content
++  (#match? @injection.content "^/[*][*]")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
++
++; Match /*! ... */ block comments (Qt-style Doxygen)
++((comment) @injection.content
++  (#match? @injection.content "^/[*]!")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
++
++; Match ///  line comments (triple-slash Doxygen)
++((comment) @injection.content
++  (#match? @injection.content "^///")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
++
++; Match //! line comments (Qt-style Doxygen line comments)
++((comment) @injection.content
++  (#match? @injection.content "^//!")
++  (#set! injection.language "doxygen")
++  (#set! injection.include-children))
+diff --git a/after/queries/html/injections.scm b/after/queries/html/injections.scm
+new file mode 100644
+index 0000000..f238925
+--- /dev/null
++++ b/after/queries/html/injections.scm
+@@ -0,0 +1,14 @@
++;extends
++; ((element)
++;   (start_tag
++;     (tag_name) @_tag)
++;   (#eq? @_tag "lua")
++;   (#set! injection.language "lua")
++;   (text) @injection.content)
++; Vim: set expandtab tabstop=2 shiftwidth=2:
++(element
++  (start_tag
++    (tag_name) @_tag)
++  (text) @injection.content
++  (#eq? @_tag "lua")
++  (#set! injection.language "lua"))
+-- 
+2.53.0
+
