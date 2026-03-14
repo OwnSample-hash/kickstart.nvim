@@ -1,0 +1,25 @@
+From 2c3f7ccd8025eec4afb1eb174f606b8bb47ee254 Mon Sep 17 00:00:00 2001
+From: OwnSample <ownsample@tutanota.com>
+Date: Sat, 14 Mar 2026 11:43:35 +0100
+Subject: [PATCH 5/5] feat: enable custom plugins
+
+---
+ init.lua | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/init.lua b/init.lua
+index ed50b69..5fe20d0 100644
+--- a/init.lua
++++ b/init.lua
+@@ -920,7 +920,7 @@ require('lazy').setup({
+   --    This is the easiest way to modularize your config.
+   --
+   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+-  -- { import = 'custom.plugins' },
++  { import = 'custom.plugins' },
+   --
+   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
+   -- Or use telescope!
+-- 
+2.53.0
+
