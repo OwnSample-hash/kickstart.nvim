@@ -1,7 +1,7 @@
-From 195b10366def4a1f200a9145168c6b907334ae30 Mon Sep 17 00:00:00 2001
+From e1e5a9931b5e797927371b1e10f771ee1c719e56 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Fri, 13 Mar 2026 15:54:18 +0100
-Subject: [PATCH 3/5] feat: track `lazy-lock.json`
+Subject: [PATCH 3/6] feat: track `lazy-lock.json`
 
 ---
  .gitignore     |  2 +-

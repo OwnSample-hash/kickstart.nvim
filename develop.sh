@@ -6,9 +6,10 @@ mkdir -p patches
 
 CURRENT_BR=$(git branch --show-current)
 
-git update-index --assume-unchanged patches/*
 git checkout -b develop origin/master
 git am patches/*.patch
+PATCHES=$(ls patches)
+git update-index --assume-unchanged $PATCHES
 
 echo Staring dev shell commit every change you wish to add to the patch set
 case $SHELL in
@@ -33,5 +34,5 @@ rm patches/*.patch
 git format-patch origin/master..develop -o patches
 git checkout $CURRENT_BR
 git branch -D develop
-git update-index --no-assume-unchanged patches/*
+git update-index --no-assume-unchanged $PATCHES
 
