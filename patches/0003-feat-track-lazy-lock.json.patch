@@ -1,7 +1,7 @@
-From e1e5a9931b5e797927371b1e10f771ee1c719e56 Mon Sep 17 00:00:00 2001
+From 46d65f413b897e210b4b5231695f84a83b082970 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Fri, 13 Mar 2026 15:54:18 +0100
-Subject: [PATCH 3/6] feat: track `lazy-lock.json`
+Subject: [PATCH 3/5] feat: track `lazy-lock.json`
 
 ---
  .gitignore     |  2 +-
@@ -10,10 +10,10 @@ Subject: [PATCH 3/6] feat: track `lazy-lock.json`
  create mode 100644 lazy-lock.json
 
 diff --git a/.gitignore b/.gitignore
-index 3bec00f..b182ec2 100644
+index 71abce7..255fd4a 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -8,6 +8,6 @@ spell/
+@@ -8,7 +8,7 @@ spell/
  # You likely want to comment this, since it's recommended to track lazy-lock.json in version
  # control, see https://lazy.folke.io/usage/lockfile
  # For kickstart, it makes sense to leave it ignored.
@@ -21,6 +21,7 @@ index 3bec00f..b182ec2 100644
 +# lazy-lock.json
  
  .DS_Store
+ .zcompdump*
 diff --git a/lazy-lock.json b/lazy-lock.json
 new file mode 100644
 index 0000000..f6bb863
