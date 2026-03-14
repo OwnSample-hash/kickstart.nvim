@@ -83,4 +83,5 @@ git for-each-ref \
     || true
 echo ""
 success "Done. You are now on branch '$(git symbolic-ref --short HEAD)'."
+info "Applying patches from 'patches/' directory"
 git am patches/*.patch
