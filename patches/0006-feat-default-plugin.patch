@@ -1,0 +1,45 @@
+From c67454c334f3c4b4d3a47513e8cebdbd9e94e058 Mon Sep 17 00:00:00 2001
+From: OwnSample <ownsample@tutanota.com>
+Date: Sat, 14 Mar 2026 14:52:11 +0100
+Subject: [PATCH 6/6] feat: default plugin
+
+enabled some default plugins
+---
+ init.lua | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/init.lua b/init.lua
+index 5fe20d0..ac3e913 100644
+--- a/init.lua
++++ b/init.lua
+@@ -873,6 +873,13 @@ require('lazy').setup({
+     build = ':TSUpdate',
+     branch = 'main',
+     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
++    install_dir = vim.fn.stdpath 'data' .. '/site',
++    opts = {
++      -- ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'doxygen' },
++      highlight = { enable = true },
++      indent = { enable = true },
++      injections = { enable = true },
++    },
+     config = function()
+       local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+       require('nvim-treesitter').install(parsers)
+@@ -910,10 +917,10 @@ require('lazy').setup({
+   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
+   --
+   -- require 'kickstart.plugins.debug',
+-  -- require 'kickstart.plugins.indent_line',
++  require 'kickstart.plugins.indent_line',
+   -- require 'kickstart.plugins.lint',
+-  -- require 'kickstart.plugins.autopairs',
+-  -- require 'kickstart.plugins.neo-tree',
++  require 'kickstart.plugins.autopairs',
++  require 'kickstart.plugins.neo-tree',
+   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
+ 
+   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+-- 
+2.53.0
+
