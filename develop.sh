@@ -8,7 +8,7 @@ CURRENT_BR=$(git branch --show-current)
 
 git checkout -b develop origin/master
 git am patches/*.patch
-PATCHES=$(ls patches)
+PATCHES=$(find patches -type f)
 git update-index --assume-unchanged $PATCHES
 
 echo Staring dev shell commit every change you wish to add to the patch set
