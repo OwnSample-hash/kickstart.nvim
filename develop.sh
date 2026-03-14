@@ -9,7 +9,10 @@ CURRENT_BR=$(git branch --show-current)
 git checkout -b develop origin/master
 git am patches/*.patch
 PATCHES=$(find patches -type f)
-git update-index --assume-unchanged $PATCHES
+git update-index --assume-unchanged $PATCHES 
+if [[ -f lazy-lock.json ]];then
+  git update-index --assume-unchanged lazy-lock.json
+fi
 
 echo Staring dev shell commit every change you wish to add to the patch set
 case $SHELL in
@@ -35,4 +38,7 @@ git format-patch origin/master..develop -o patches
 git checkout $CURRENT_BR
 git branch -D develop
 git update-index --no-assume-unchanged $PATCHES
+if [[ -f lazy-lock.json ]];then
+  git update-index --assume-unchanged lazy-lock.json
+fi
 
