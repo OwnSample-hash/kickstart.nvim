@@ -1,7 +1,7 @@
-From 5a4ea4610c647166cd30043d7e5ce3120d9e5e31 Mon Sep 17 00:00:00 2001
+From 2c9b429820f8106cd2cccd5fa48acb1c81522cce Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 11:43:35 +0100
-Subject: [PATCH 4/7] feat: enable custom plugins
+Subject: [PATCH 4/6] feat: enable custom plugins
 
 ---
  init.lua | 2 +-
