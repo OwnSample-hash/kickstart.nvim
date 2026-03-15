@@ -1,7 +1,7 @@
-From 2c2914f7000b629b635138a537637ad50ae28882 Mon Sep 17 00:00:00 2001
+From 8f5f2d06661b0d9fc5099fb70c8647bc63178d1f Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Fri, 13 Mar 2026 15:54:00 +0100
-Subject: [PATCH 2/7] feat: custom plugins
+Subject: [PATCH 2/6] feat: custom plugins
 
 ---
  lua/custom/plugins/init.lua | 171 ++++++++++++++++++++++++++++++++++--
