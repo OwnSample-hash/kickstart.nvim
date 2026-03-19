@@ -1,7 +1,7 @@
-From 2e8b64dceb4046b65519d99eff123d0e21a4da2a Mon Sep 17 00:00:00 2001
+From 629738117b73e8da2d6608b6a08b3edc86fb3338 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sun, 15 Mar 2026 08:49:29 +0100
-Subject: [PATCH 7/8] feat: enable couple of ls-es
+Subject: [PATCH 7/9] feat: enable couple of ls-es
 
 ---
  init.lua | 4 ++--
