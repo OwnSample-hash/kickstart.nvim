@@ -1,7 +1,7 @@
-From f71a10f731d118076830192b17ba58b57c270d16 Mon Sep 17 00:00:00 2001
+From 4294ec407a6be2e44e9c82a8685fc0f21331957a Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 15:52:39 +0100
-Subject: [PATCH 6/8] feat: enable nerd font
+Subject: [PATCH 6/9] feat: enable nerd font
 
 ---
  init.lua | 2 +-
