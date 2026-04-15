@@ -1,14 +1,14 @@
-From 4294ec407a6be2e44e9c82a8685fc0f21331957a Mon Sep 17 00:00:00 2001
+From 6bdd22aeadeca5495aeb4ef158652e7c72e6f4c7 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 15:52:39 +0100
-Subject: [PATCH 6/9] feat: enable nerd font
+Subject: [PATCH 5/8] feat: enable nerd font
 
 ---
  init.lua | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/init.lua b/init.lua
-index ac3e913..54fdf1a 100644
+index bd1964e..37be514 100644
 --- a/init.lua
 +++ b/init.lua
 @@ -91,7 +91,7 @@ vim.g.mapleader = ' '

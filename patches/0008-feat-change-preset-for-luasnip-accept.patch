@@ -1,14 +1,14 @@
-From 0d2b5f3f81d807a26bdd867d7f4f3acad370d344 Mon Sep 17 00:00:00 2001
+From 055457f47ca73c5646350aa4fdfb47cd85cca31c Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Thu, 19 Mar 2026 15:32:40 +0100
-Subject: [PATCH 9/9] feat: change preset for luasnip accept
+Subject: [PATCH 8/8] feat: change preset for luasnip accept
 
 ---
  init.lua | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/init.lua b/init.lua
-index 2aaa981..d279801 100644
+index 07c96a3..ecf078a 100644
 --- a/init.lua
 +++ b/init.lua
 @@ -760,7 +760,7 @@ require('lazy').setup({
