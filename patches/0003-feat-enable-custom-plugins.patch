@@ -1,17 +1,17 @@
-From 49e096a0cb5e4702f8715ee406aa19221d8c01e1 Mon Sep 17 00:00:00 2001
+From 573cea67cc675c9a6dbfe5c6296047ea6964afac Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 11:43:35 +0100
-Subject: [PATCH 4/9] feat: enable custom plugins
+Subject: [PATCH 3/8] feat: enable custom plugins
 
 ---
  init.lua | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/init.lua b/init.lua
-index ed50b69..5fe20d0 100644
+index b56ce29..e6a3c32 100644
 --- a/init.lua
 +++ b/init.lua
-@@ -920,7 +920,7 @@ require('lazy').setup({
+@@ -944,7 +944,7 @@ require('lazy').setup({
    --    This is the easiest way to modularize your config.
    --
    --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.

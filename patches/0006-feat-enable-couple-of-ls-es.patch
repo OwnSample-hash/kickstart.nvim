@@ -1,14 +1,14 @@
-From 629738117b73e8da2d6608b6a08b3edc86fb3338 Mon Sep 17 00:00:00 2001
+From 0916789eac7749b8607488fed2b03ddeb528a3e6 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sun, 15 Mar 2026 08:49:29 +0100
-Subject: [PATCH 7/9] feat: enable couple of ls-es
+Subject: [PATCH 6/8] feat: enable couple of ls-es
 
 ---
  init.lua | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/init.lua b/init.lua
-index 54fdf1a..cbc4c20 100644
+index 37be514..37fdba4 100644
 --- a/init.lua
 +++ b/init.lua
 @@ -600,9 +600,9 @@ require('lazy').setup({

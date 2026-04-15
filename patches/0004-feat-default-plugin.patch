@@ -1,32 +1,30 @@
-From 98d88dd28029212ec61e8867f82b8e27e4c96e54 Mon Sep 17 00:00:00 2001
+From cde76e080e013c80d0df97b198ba565bd0a78ef5 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 14:52:11 +0100
-Subject: [PATCH 5/9] feat: default plugin
+Subject: [PATCH 4/8] feat: default plugin
 
 enabled some default plugins
 ---
- init.lua | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
+ init.lua | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/init.lua b/init.lua
-index 5fe20d0..ac3e913 100644
+index e6a3c32..bd1964e 100644
 --- a/init.lua
 +++ b/init.lua
-@@ -873,6 +873,13 @@ require('lazy').setup({
+@@ -873,6 +873,11 @@ require('lazy').setup({
      build = ':TSUpdate',
      branch = 'main',
      -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
-+    install_dir = vim.fn.stdpath 'data' .. '/site',
 +    opts = {
-+      -- ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'doxygen' },
-+      highlight = { enable = true },
-+      indent = { enable = true },
-+      injections = { enable = true },
++      highlight = { enabled = true },
++      indent = { enabled = true },
++      inject = { enabled = true },
 +    },
      config = function()
+       -- ensure basic parser are installed
        local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
-       require('nvim-treesitter').install(parsers)
-@@ -910,10 +917,10 @@ require('lazy').setup({
+@@ -934,10 +939,10 @@ require('lazy').setup({
    --  Uncomment any of the lines below to enable them (you will need to restart nvim).
    --
    -- require 'kickstart.plugins.debug',

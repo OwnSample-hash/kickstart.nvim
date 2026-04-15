@@ -1,14 +1,14 @@
-From 84fea3d80d63e661d9e192e6f9805b60f6a178f5 Mon Sep 17 00:00:00 2001
+From 9c6c7193c815165e799cfa7484bb87d9b92400eb Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sun, 15 Mar 2026 09:04:59 +0100
-Subject: [PATCH 8/9] feat: enable c cpp format on save
+Subject: [PATCH 7/8] feat: enable c cpp format on save
 
 ---
  init.lua | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/init.lua b/init.lua
-index cbc4c20..2aaa981 100644
+index 37fdba4..07c96a3 100644
 --- a/init.lua
 +++ b/init.lua
 @@ -684,7 +684,7 @@ require('lazy').setup({
