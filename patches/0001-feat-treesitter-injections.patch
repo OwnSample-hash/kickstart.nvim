@@ -1,7 +1,7 @@
-From 6b133b6434b87f9bb8b7c235dcf4b856522b3c2c Mon Sep 17 00:00:00 2001
+From ef5e5c4d829166fc6773272176ede3ba2364fcb7 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Fri, 13 Mar 2026 15:53:38 +0100
-Subject: [PATCH 1/8] feat: treesitter injections
+Subject: [PATCH 1/9] feat: treesitter injections
 
 ---
  after/queries/c/injections.scm    | 27 +++++++++++++++++++++++++++

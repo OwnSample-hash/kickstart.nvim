@@ -1,7 +1,7 @@
-From cde76e080e013c80d0df97b198ba565bd0a78ef5 Mon Sep 17 00:00:00 2001
+From e8281e49d66c32cfd3e2b4c02315d67755fda4d2 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 14:52:11 +0100
-Subject: [PATCH 4/8] feat: default plugin
+Subject: [PATCH 4/9] feat: default plugin
 
 enabled some default plugins
 ---
