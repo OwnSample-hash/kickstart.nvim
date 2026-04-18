@@ -1,7 +1,7 @@
-From 055457f47ca73c5646350aa4fdfb47cd85cca31c Mon Sep 17 00:00:00 2001
+From ef6b93898dd05e6e5600c7f27674d5dc130663d4 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Thu, 19 Mar 2026 15:32:40 +0100
-Subject: [PATCH 8/8] feat: change preset for luasnip accept
+Subject: [PATCH 8/9] feat: change preset for luasnip accept
 
 ---
  init.lua | 2 +-

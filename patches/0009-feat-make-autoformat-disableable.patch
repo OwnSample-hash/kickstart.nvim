@@ -1,0 +1,140 @@
+From 5c8392a52ab0c3cde4d12748bcc026f291105de8 Mon Sep 17 00:00:00 2001
+From: OwnSample <ownsample@tutanota.com>
+Date: Sat, 18 Apr 2026 10:55:32 +0200
+Subject: [PATCH 9/9] feat: make autoformat disableable
+
+---
+ init.lua                    |  1 +
+ lua/custom/plugins/post.lua | 78 +++++++++++++++++--------------------
+ 2 files changed, 37 insertions(+), 42 deletions(-)
+
+diff --git a/init.lua b/init.lua
+index ecf078a..70e2e0c 100644
+--- a/init.lua
++++ b/init.lua
+@@ -684,6 +684,7 @@ require('lazy').setup({
+         -- Disable "format_on_save lsp_fallback" for languages that don't
+         -- have a well standardized coding style. You can add additional
+         -- languages here or re-enable it for the disabled ones.
++        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+         local disable_filetypes = {}
+         if disable_filetypes[vim.bo[bufnr].filetype] then
+           return nil
+diff --git a/lua/custom/plugins/post.lua b/lua/custom/plugins/post.lua
+index 6f28327..85f6742 100644
+--- a/lua/custom/plugins/post.lua
++++ b/lua/custom/plugins/post.lua
+@@ -24,39 +24,17 @@ vim.keymap.set('n', '<leader>Q', function()
+   vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
+ end, { desc = 'Toggle Floating Diagnostics' })
+ 
+-vim.keymap.set('n', '<F5>', function()
+-  require('dap').continue()
+-end)
+-vim.keymap.set('n', '<F10>', function()
+-  require('dap').step_over()
+-end)
+-vim.keymap.set('n', '<F11>', function()
+-  require('dap').step_into()
+-end)
+-vim.keymap.set('n', '<F12>', function()
+-  require('dap').step_out()
+-end)
+-vim.keymap.set('n', '<Leader>b', function()
+-  require('dap').toggle_breakpoint()
+-end)
+-vim.keymap.set('n', '<Leader>B', function()
+-  require('dap').set_breakpoint()
+-end)
+-vim.keymap.set('n', '<Leader>lp', function()
+-  require('dap').set_breakpoint(nil, nil, vim.fn.input 'Log point message: ')
+-end)
+-vim.keymap.set('n', '<Leader>dr', function()
+-  require('dap').repl.open()
+-end)
+-vim.keymap.set('n', '<Leader>dl', function()
+-  require('dap').run_last()
+-end)
+-vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
+-  require('dap.ui.widgets').hover()
+-end)
+-vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
+-  require('dap.ui.widgets').preview()
+-end)
++vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
++vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
++vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
++vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
++vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
++vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
++vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input 'Log point message: ') end)
++vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
++vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
++vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function() require('dap.ui.widgets').hover() end)
++vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function() require('dap.ui.widgets').preview() end)
+ vim.keymap.set('n', '<Leader>df', function()
+   local widgets = require 'dap.ui.widgets'
+   widgets.centered_float(widgets.frames)
+@@ -78,9 +56,7 @@ dap.configurations.c = {
+     name = 'Launch',
+     type = 'gdb',
+     request = 'launch',
+-    program = function()
+-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+-    end,
++    program = function() return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file') end,
+     cwd = '${workspaceFolder}',
+     stopAtBeginningOfMainSubprogram = false,
+   },
+@@ -88,9 +64,7 @@ dap.configurations.c = {
+     name = 'Select and attach to process',
+     type = 'gdb',
+     request = 'attach',
+-    program = function()
+-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+-    end,
++    program = function() return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file') end,
+     pid = function()
+       local name = vim.fn.input 'Executable name (filter): '
+       return require('dap.utils').pick_process { filter = name }
+@@ -102,9 +76,7 @@ dap.configurations.c = {
+     type = 'gdb',
+     request = 'attach',
+     target = 'localhost:1234',
+-    program = function()
+-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+-    end,
++    program = function() return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file') end,
+     cwd = '${workspaceFolder}',
+   },
+ }
+@@ -144,4 +116,26 @@ vim.api.nvim_set_hl(0, '@type.doxygen', { link = 'Type' }) -- type names in para
+ vim.api.nvim_set_hl(0, '@variable.parameter.doxygen', { link = 'Identifier' })
+ vim.api.nvim_set_hl(0, '@text.uri.doxygen', { link = 'Underlined' }) -- URLs in comments
+ 
++vim.api.nvim_create_user_command('FormatDisable', function(args)
++  if args.bang then
++    -- FormatDisable! will disable formatting just for this buffer
++    vim.b.disable_autoformat = true
++    vim.cmd('echo "Autoformat disabled for this buffer"')
++  else
++    vim.g.disable_autoformat = true
++    vim.cmd('echo "Autoformat disabled globally"')
++  end
++end, {
++  desc = 'Disable autoformat-on-save',
++  bang = true,
++})
++
++vim.api.nvim_create_user_command('FormatEnable', function()
++  vim.b.disable_autoformat = false
++  vim.g.disable_autoformat = false
++  vim.cmd('echo "Autoformat enabled"')
++end, {
++  desc = 'Re-enable autoformat-on-save',
++})
++
+ return {}
+-- 
+2.53.0
+
