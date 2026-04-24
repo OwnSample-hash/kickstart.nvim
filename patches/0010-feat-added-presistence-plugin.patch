@@ -1,0 +1,35 @@
+From 66be45f364b1741ed25bb81a2131b0d2652f4c3f Mon Sep 17 00:00:00 2001
+From: OwnSample <ownsample@tutanota.com>
+Date: Fri, 24 Apr 2026 15:27:48 +0200
+Subject: [PATCH 10/10] feat: added presistence plugin
+
+---
+ lua/custom/plugins/init.lua | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/lua/custom/plugins/init.lua b/lua/custom/plugins/init.lua
+index 7d29c69..22cc408 100644
+--- a/lua/custom/plugins/init.lua
++++ b/lua/custom/plugins/init.lua
+@@ -163,5 +163,18 @@ return {
+       -- }
+     end,
+   },
++  {
++    'folke/persistence.nvim',
++    event = 'BufReadPre', -- this will only start session saving when an actual file was opened
++    opts = {
++      -- add any custom options here
++    },
++    keys = {
++      { '<leader>qs', '<cmd>lua require("persistence").load()<cr>', desc = '[Q]uick [S]ession Load' },
++      { '<leader>qS', '<cmd>lua require("persistence").select()<cr>', desc = '[Q]uick [S]ession Select' },
++      { '<leader>ql', '<cmd>lua require("persistence").load({ last = true })<cr>', desc = '[Q]uick [L]ast Session Load' },
++      { '<leader>qd', '<cmd>lua require("persistence").stop()<cr>', desc = '[Q]uick [D]elete Session' },
++    },
++  },
+ }
+ -- Vim: set expandtab tabstop=2 shiftwidth=2:
+-- 
+2.54.0
+

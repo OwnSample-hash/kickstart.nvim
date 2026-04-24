@@ -1,7 +1,7 @@
-From 24500f0f04b29af92c931a78b6cb59a3a9149fc0 Mon Sep 17 00:00:00 2001
+From 8b88cc594f4c2ee2ebd23142c27ea321b8a4ff70 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sun, 15 Mar 2026 09:04:59 +0100
-Subject: [PATCH 7/9] feat: enable c cpp format on save
+Subject: [PATCH 07/10] feat: enable c cpp format on save
 
 ---
  init.lua | 2 +-
@@ -21,5 +21,5 @@ index 37fdba4..07c96a3 100644
            return nil
          else
 -- 
-2.53.0
+2.54.0
 
