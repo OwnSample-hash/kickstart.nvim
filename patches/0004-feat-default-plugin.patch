@@ -1,7 +1,7 @@
-From e8281e49d66c32cfd3e2b4c02315d67755fda4d2 Mon Sep 17 00:00:00 2001
+From 3785c66e45df5aad8b3ddfabfd29611c24efc231 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 14:52:11 +0100
-Subject: [PATCH 4/9] feat: default plugin
+Subject: [PATCH 04/10] feat: default plugin
 
 enabled some default plugins
 ---
@@ -39,5 +39,5 @@ index e6a3c32..bd1964e 100644
  
    -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 -- 
-2.53.0
+2.54.0
 

@@ -1,7 +1,7 @@
-From 72da74f4a34fa59f2715cee75028aaedfca715eb Mon Sep 17 00:00:00 2001
+From 02403070f0265777efab90a7572a4a7cedc46b26 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 14 Mar 2026 15:52:39 +0100
-Subject: [PATCH 5/9] feat: enable nerd font
+Subject: [PATCH 05/10] feat: enable nerd font
 
 ---
  init.lua | 2 +-
@@ -21,5 +21,5 @@ index bd1964e..37be514 100644
  -- [[ Setting options ]]
  -- See `:help vim.o`
 -- 
-2.53.0
+2.54.0
 

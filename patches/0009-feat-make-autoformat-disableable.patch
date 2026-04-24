@@ -1,7 +1,7 @@
-From 5c8392a52ab0c3cde4d12748bcc026f291105de8 Mon Sep 17 00:00:00 2001
+From bd4d795d97febb9ee08008ffb8c86b671d3ffb28 Mon Sep 17 00:00:00 2001
 From: OwnSample <ownsample@tutanota.com>
 Date: Sat, 18 Apr 2026 10:55:32 +0200
-Subject: [PATCH 9/9] feat: make autoformat disableable
+Subject: [PATCH 09/10] feat: make autoformat disableable
 
 ---
  init.lua                    |  1 +
@@ -136,5 +136,5 @@ index 6f28327..85f6742 100644
 +
  return {}
 -- 
-2.53.0
+2.54.0
 
